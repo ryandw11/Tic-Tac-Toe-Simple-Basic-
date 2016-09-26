@@ -1,0 +1,196 @@
+GraphicsWindow.BackgroundColor = "Black"
+GraphicsWindow.Width = 590
+GraphicsWindow.Title = "Tic-Tac-Toe"
+GraphicsWindow.MouseDown = OnMouseDown
+x = 470
+y = 330
+
+cords["1"]["X"] = 70
+cords["1"]["Y"] = 30
+cords["2"]["X"] = 270
+cords["2"]["Y"] = 30
+cords["3"]["X"] = 470
+cords["3"]["Y"] = 30
+cords["4"]["X"] = 70
+cords["4"]["Y"] = 180
+cords["5"]["X"] = 270
+cords["5"]["Y"] = 180
+cords["6"]["X"] = 470
+cords["6"]["Y"] = 180
+cords["7"]["X"] = 70
+cords["7"]["Y"] = 330
+cords["8"]["X"] = 270
+cords["8"]["Y"] = 330
+cords["9"]["X"] = 470
+cords["9"]["Y"] = 330
+
+board["1"]= ""
+board["2"]= ""
+board["3"]= ""
+board["4"]= ""
+board["5"]= ""
+board["6"]= ""
+board["7"]= ""
+board["8"]= ""
+board["9"]= ""
+CurrentTurn = "X"
+clicked = "false"
+Restart:
+drawBoard()
+
+GraphicsWindow.ShowMessage("Begin Tic-Tac-Toe. Player X goes first", "Tic-Tac-Toe")
+loop:
+If(clicked = "false") then
+ 
+ Else
+  winCheck()
+  clicked = "false"
+  Goto loop
+EndIf
+
+
+
+
+Sub drawBoard
+  GraphicsWindow.PenColor = "White"
+  GraphicsWindow.PenWidth = 5
+  GraphicsWindow.DrawLine(200, 0, 200, 500)
+  GraphicsWindow.DrawLine(400, 0, 400, 500)
+  GraphicsWindow.DrawLine(0, 150, 620, 150)
+  GraphicsWindow.DrawLine(0, 300, 620, 300)
+  For i = 1 To 9
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[i]["X"], cords[i]["Y"], " ")
+  EndFor
+  
+EndSub
+Sub OnMouseDown
+  mx = GraphicsWindow.MouseX
+  my = GraphicsWindow.MouseY
+  If(mx < 200 and my < 150 And board[1] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[1]["X"], cords[1]["Y"], CurrentTurn)
+    board[1] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx < 400 And mx > 200 and my < 150 And board[2] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[2]["X"], cords[2]["Y"], CurrentTurn)
+    board[2] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx > 400 and my < 150 And board[3] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[3]["X"], cords[3]["Y"], CurrentTurn)
+    board[3] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx < 200 And mx > 0 and my > 150 And my < 300 And board[4] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[4]["X"], cords[4]["Y"], CurrentTurn)
+    board[4] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx < 400 And mx > 200 and my > 150 And my < 300 And board[5] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[5]["X"], cords[5]["Y"], CurrentTurn)
+    board[5] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx > 400 and my > 150 And my < 300 And board[6] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[6]["X"], cords[6]["Y"], CurrentTurn)
+    board[6] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx < 200 And mx > 0 and my > 300 And board[7] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[7]["X"], cords[7]["Y"], CurrentTurn)
+    board[7] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx < 400 And mx > 200 and my > 300 And board[8] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[8]["X"], cords[8]["Y"], CurrentTurn)
+    board[8] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+  EndIf
+  If(mx > 400 and my > 300 And board[9] = "") then
+    GraphicsWindow.FontSize = 70
+    GraphicsWindow.DrawText(cords[9]["X"], cords[9]["Y"], CurrentTurn)
+    board[9] = CurrentTurn
+    nextTurn()
+  clicked = "true"
+EndIf
+winCheck()
+EndSub
+
+Sub nextTurn
+  If(CurrentTurn = "X") Then
+    CurrentTurn = "O"
+  Else
+    CurrentTurn = "X"
+  EndIf
+
+  
+EndSub
+
+Sub winCheck
+  If(board[1] = "X" And board[2] = "X" And board[3] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[4] = "X" And board[5] = "X" And board[6] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[7] = "X" And board[8] = "X" And board[9] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[1] = "X" And board[5] = "X" And board[9] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[3] = "X" And board[5] = "X" And board[7] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[1] = "X" And board[4] = "X" And board[7] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[2] = "X" And board[5] = "X" And board[8] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[3] = "X" And board[6] = "X" And board[9] = "X") Then
+    GraphicsWindow.ShowMessage("Player X Wins", "Tic-Tac-Toe")
+  EndIf
+  
+  If(board[1] = "O" And board[2] = "O" And board[3] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[4] = "O" And board[5] = "O" And board[6] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[7] = "O" And board[8] = "O" And board[9] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[1] = "O" And board[5] = "O" And board[9] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[3] = "O" And board[5] = "O" And board[7] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[1] = "O" And board[4] = "O" And board[7] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[2] = "O" And board[5] = "O" And board[8] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+  If(board[3] = "O" And board[6] = "O" And board[9] = "O") Then
+    GraphicsWindow.ShowMessage("Player O Wins", "Tic-Tac-Toe")
+  EndIf
+EndSub
